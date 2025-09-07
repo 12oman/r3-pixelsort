@@ -5,6 +5,15 @@ import { TextureLoader, VideoTexture, NearestFilter, LinearFilter, RGBAFormat } 
 
 
 
+const vertexShader = `
+    varying vec2 vUv;
+
+    void main() {
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+`;
+
 const fragmentShader = `
     precision highp float;
 
@@ -41,8 +50,10 @@ const PixelSortShader = () => {
             });
 
         return () => {
-            const tracks = video.srcObject.getTracks();
-            tracks.forEach(track => track.stop());
+            if (video.srcObject) {
+                const tracks = video.srcObject.getTracks();
+                tracks.forEach(track => track.stop());
+            }
         };
     }, []);
 
@@ -52,16 +63,14 @@ const PixelSortShader = () => {
 
     return (
         <mesh>
-            <planeBufferGeometry args={[1, 1]} />
+            <planeGeometry args={[4, 3]} />
 
             <shaderMaterial
-                attach="material"
-                args={[{
-                    fragmentShader,
-                    uniforms: {
-                        uTexture: { value: videoTexture }
-                    }
-                }]}
+                vertexShader={vertexShader}
+                fragmentShader={fragmentShader}
+                uniforms={{
+                    uTexture: { value: videoTexture }
+                }}
             />
         </mesh>
     );

@@ -7,9 +7,14 @@ import PixelSortShader from './components/PixelSortShader';
 
 function App() {
     return (
-        <Canvas>
-            <PixelSortShader imageURL="https://64.media.tumblr.com/2e16039b21b38a934b5244f68a5dac7a/b3cceba71b83cfd4-32/s640x960/7392a920ddc2d5557978c470f804476cd944e361.webp" />
-        </Canvas>
+        <div style={{ width: '100vw', height: '100vh' }}>
+            <Canvas 
+                camera={{ position: [0, 0, 2], fov: 75 }}
+                style={{ width: '100%', height: '100%' }}
+            >
+                <PixelSortShader />
+            </Canvas>
+        </div>
     );
 }
 
