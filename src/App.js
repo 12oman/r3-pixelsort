@@ -1,25 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
 
+import React from 'react';
+import { Canvas } from '@react-three/fiber';
+import PixelSortShader from './components/PixelSortShader';
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Canvas>
+            <PixelSortShader imageURL="https://64.media.tumblr.com/2e16039b21b38a934b5244f68a5dac7a/b3cceba71b83cfd4-32/s640x960/7392a920ddc2d5557978c470f804476cd944e361.webp" />
+        </Canvas>
+    );
 }
 
 export default App;
+
